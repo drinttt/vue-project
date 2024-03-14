@@ -1,6 +1,6 @@
 <script setup>
 // import { ref,defineEmits} from 'vue'
-import { ref,} from 'vue'
+import { ref, } from 'vue'
 
 import { useloginStore } from '@/stores/login'
 
@@ -18,7 +18,7 @@ function onClick() {
 //   Username: String,
 // });
 
-const logout = () =>{
+const logout = () => {
   // emit("logout")
   loginStore.logout()
 }
@@ -44,7 +44,18 @@ const logout = () =>{
 
       <v-list density="compact" nav>
         <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
-        <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
+
+        <v-list-item>
+          <v-list-item-icon>
+            <v-icon>mdi-account-multiple</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <router-link to="/about" class="text-decoration-none">
+              <v-list-item-title>Shared with me</v-list-item-title>
+            </router-link>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
       </v-list>
     </v-navigation-drawer>

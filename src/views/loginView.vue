@@ -16,7 +16,7 @@ const valid = ref(true);
 const login = async () => {
   const { valid: formValid } = await form.value.validate();
   if (formValid) {
-    loginStore.login(Username.value);
+    loginStore.login(Username.value, Password.value);
     console.log("form success");
     // emit("login", Username.value)
   }
@@ -66,10 +66,10 @@ const login = async () => {
                         </v-card-actions>
                         <br />
                     </v-card>
-                    <pre>
+                    <!-- <pre>
                         {{ Username }}
                         {{ Password }}
-                    </pre>
+                    </pre> -->
                 </v-col>
             </v-row>
         </v-container>
