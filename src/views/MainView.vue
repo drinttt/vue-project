@@ -1,10 +1,12 @@
 <script setup>
 // import { ref,defineEmits} from 'vue'
-import { ref, } from 'vue'
+import { ref } from 'vue'
 
 import { useloginStore } from '@/stores/login'
+import { useUserProfileStore } from '@/stores/profile'
 
-const loginStore = useloginStore();
+const loginStore = useloginStore()
+const userStore = useUserProfileStore()
 
 const theme = ref('light')
 
@@ -29,12 +31,15 @@ const logout = () => {
     <v-app-bar>
       <v-spacer></v-spacer>
 
-      <v-btn prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
-        @click="onClick">Toggle</v-btn>
+      <v-btn @click="onClick">
+        <v-icon>
+          {{ theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night' }}
+        </v-icon>
+      </v-btn>
       <v-btn @click="logout" color="error">Log out</v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer expand-on-hover rail permanent>
+    <!-- <v-navigation-drawer expand-on-hover rail permanent>
       <v-list>
         <v-list-item prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg" subtitle="sandra_a88@gmailcom"
           :title="loginStore.Username"></v-list-item>
@@ -58,12 +63,43 @@ const logout = () => {
 
         <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
 
-    <v-main>
+    <!-- # 2 -->
+    <v-layout class="rounded rounded-md">
+      <v-app-bar title="Application bar"></v-app-bar>
+
+      <v-navigation-drawer>
+        <v-list>
+          <v-list-item prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+            :subtitle="userStore.userProfile.email" :title="loginStore.Username"></v-list-item>
+        </v-list>
+        <v-divider></v-divider>
+
+        <v-list dense nav>
+          <v-list-item prepend-icon="mdi-home" title="Home" value="starred" to="/"></v-list-item>
+        
+          <v-list-item prepend-icon="mdi-folder" title="Subject"  to="/subject"></v-list-item>
+        
+          <v-list-item prepend-icon="mdi-note-text" title="Exam" to="/test"></v-list-item>
+
+          <v-list-item prepend-icon="mdi-magnify-scan" title="Check the exam" to="/login"></v-list-item>
+        </v-list>
+
+
+      </v-navigation-drawer>
+
+      <v-main>
+        <v-container grid-list-xs>
+          <router-view></router-view>
+        </v-container>
+      </v-main>
+    </v-layout>
+
+    <!-- <v-main>
       <v-container>
         <router-view></router-view>
       </v-container>
-    </v-main>
+    </v-main> -->
   </v-app>
 </template>
