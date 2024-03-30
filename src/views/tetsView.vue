@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <input v-model.number="num1" type="number" placeholder="Number 1">
     <input v-model.number="num2" type="number" placeholder="Number 2">
@@ -35,4 +35,93 @@ const addNumbers = async () => {
 
 <style>
 /* สามารถเพิ่มสไตล์ที่นี่หากจำเป็น */
-</style>
+</style> -->
+
+
+<!-- <template>
+  <div>
+    <input type="file" @change="onFileChange">
+    <v-btn @click="uploadImage">Upload Image</v-btn>
+    <div v-if="imageInfo">
+      <p>Width: {{ imageInfo.width }}</p>
+      <p>Height: {{ imageInfo.height }}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      selectedFile: null,
+      imageInfo: null
+    };
+  },
+  methods: {
+    onFileChange(e) {
+      this.selectedFile = e.target.files[0];
+    },
+    uploadImage() {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+
+      axios.post('http://localhost:5000/upload-image', formData)
+        .then(response => {
+          this.imageInfo = response.data;
+        })
+        .catch(error => {
+          console.error('Error uploading image:', error);
+        });
+    }
+  }
+};
+</script> -->
+
+<template>
+  <div>
+    <input type="file" @change="onFileChange">
+    <button @click="uploadAndConvert">Upload and Convert</button>
+    <div v-if="convertedImageUrl">
+      <img :src="convertedImageUrl" alt="Converted Image">
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      selectedFile: null,
+      convertedImageUrl: null,
+    };
+  },
+  methods: {
+    onFileChange(e) {
+      this.selectedFile = e.target.files[0];
+    },
+    uploadAndConvert() {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+      
+      axios.post('http://localhost:5000/upload-and-convert', formData, {
+        responseType: 'blob', // สำคัญเพื่อรับไฟล์ภาพกลับมา
+      })
+      .then(response => {
+        // สร้าง URL จาก blob เพื่อแสดงภาพ
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        this.convertedImageUrl = url;
+      })
+      .catch(error => {
+        console.error('Error uploading and converting image:', error);
+      });
+    },
+  },
+};
+</script>
+
+
+
