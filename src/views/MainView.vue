@@ -81,9 +81,15 @@ const logout = () => {
         
           <v-list-item prepend-icon="mdi-folder" title="Subject"  to="/subject"></v-list-item>
         
-          <v-list-item prepend-icon="mdi-note-text" title="Exam" to="/test"></v-list-item>
+          <!-- <v-list-item prepend-icon="mdi-note-text" title="Exam" to="/test"></v-list-item> -->
 
-          <v-list-item prepend-icon="mdi-magnify-scan" title="Check the exam" to="/login"></v-list-item>
+          <v-list-item prepend-icon="mdi-note-text" title=" Create Exam" to="/createExam"></v-list-item>
+
+          <v-list-item prepend-icon="mdi-format-list-bulleted" title="List of student"  to="/listOfStu"></v-list-item>
+
+          <!-- <v-list-item prepend-icon="mdi-magnify-scan" title="Check the exam" to="/login"></v-list-item> -->
+
+          <v-list-item prepend-icon="mdi-magnify-scan" title="Answer Key" to="/importAnswer"></v-list-item>
         </v-list>
 
 

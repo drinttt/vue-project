@@ -29,7 +29,26 @@ const router = createRouter({
       name: 'login',
       component: () => import('../views/loginView.vue')
     },
-    
+    {
+      path: '/hExam/:code_subject',
+      name: 'hExam',
+      component: () => import('../views/HomeExam.vue')
+    },
+    {
+      path: '/createExam',
+      name: 'createExam',
+      component: () => import('../views/CreateExamView.vue')
+    },
+    {
+      path: '/importAnswer',
+      name: 'importAnswer',
+      component: () => import('../views/ImportAnswerView.vue')
+    },
+    {
+      path: '/ListOfStu',
+      name: 'ListOfStu',
+      component: () => import('../views/ListOfStudent.vue')
+    },
   ]
 })
 
